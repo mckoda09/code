@@ -1,11 +1,25 @@
 <script lang="ts">
   import Icon from "@iconify/svelte";
   import pythonBasics from "./generators/python/basics";
-  import { createHighlighter } from "shiki";
+  import { createHighlighterCore } from "shiki/core";
+  import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
   import type { Action } from "svelte/action";
   import { linesCounter, symbolsCounter } from "./counters";
   import jsBasics from "./generators/javascript/basics";
   import pythonLoops from "./generators/python/loops";
+
+  const shikiPromise = createHighlighterCore({
+    langs: [
+      import("shiki/langs/python.mjs"),
+      import("shiki/langs/javascript.mjs"),
+    ],
+    themes: [
+      import("shiki/themes/github-dark.mjs"),
+      import("shiki/themes/houston.mjs"),
+      import("shiki/themes/one-dark-pro.mjs"),
+    ],
+    engine: createJavaScriptRegexEngine(),
+  });
 
   const themes = [
     {
@@ -99,7 +113,7 @@
 
 <svelte:window onclick={() => init(document.getElementById("input")!)} />
 
-{#await createHighlighter( { langs: languages.map( (l) => import(`shiki/langs/${l.name}`) ), themes: themes.map( (t) => import(`shiki/themes/${t.name}`) ) } ) then highlighter}
+{#await shikiPromise then highlighter}
   <div class="px-5 py-32 space-y-3 text-5xl">
     <div class="">
       {@html highlighter.codeToHtml(text, {
