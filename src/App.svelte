@@ -114,7 +114,7 @@
 <svelte:window onclick={() => init(document.getElementById("input")!)} />
 
 {#await shikiPromise then highlighter}
-  <div class="px-5 py-32 space-y-3 text-5xl">
+  <div class="px-5 py-32 space-y-3 text-2xl md:text-5xl">
     <div class="">
       {@html highlighter.codeToHtml(text, {
         lang,
@@ -206,7 +206,7 @@
   <div class="text-hint text-sm">
     by <a href="https://mckoda09.ru" class="underline hover:text-primary">
       mckoda09
-    </a> with ❤️
+    </a> with ❤️ and <a href="https://github.com/mckoda09/code">source code</a>
   </div>
 </div>
 
