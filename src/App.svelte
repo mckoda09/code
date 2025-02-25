@@ -206,10 +206,10 @@
   <div class="text-hint text-sm">
     by <a href="https://mckoda09.ru" class="underline hover:text-primary">
       mckoda09
-    </a> with ❤️ and <a href="https://github.com/mckoda09/code">source code</a>
+    </a> with ❤️ and <a href="https://github.com/mckoda09/code" class="underline hover:text-primary">source code</a>
   </div>
 </div>
 
 <div
-  class="absolute top-0 left-0 w-full h-dvh bg-[url('./bg.svg')] bg-cover bg-center -z-50 opacity-70"
+  class="fixed top-0 left-0 w-full h-dvh bg-[url('./bg.svg')] bg-cover bg-center -z-50 opacity-70"
 ></div>
