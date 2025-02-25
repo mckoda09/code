@@ -99,7 +99,7 @@
 
 <svelte:window onclick={() => init(document.getElementById("input")!)} />
 
-{#await createHighlighter( { langs: languages.map((l) => l.name), themes: themes.map((t) => t.name) } ) then highlighter}
+{#await createHighlighter( { langs: languages.map( (l) => import(`shiki/langs/${l.name}`) ), themes: themes.map( (t) => import(`shiki/themes/${t.name}`) ) } ) then highlighter}
   <div class="px-5 py-32 space-y-3 text-5xl">
     <div class="">
       {@html highlighter.codeToHtml(text, {
