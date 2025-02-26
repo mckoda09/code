@@ -78,14 +78,12 @@
         .find((l) => l.name == lang)!
         .modes.find((m) => m.name == mode)!
         .generator();
-    } else if (text) {
-      if (input == text) {
-        symbolsCounter.increase(text.length);
-        text = "";
-        input = "";
-        count += 1;
-        linesCounter.increase();
-      }
+    } else if (text && input == text) {
+      symbolsCounter.increase(text.length);
+      linesCounter.increase();
+      count += 1;
+      text = "";
+      input = "";
     }
   });
 
@@ -113,9 +111,14 @@
 
 <svelte:window onclick={() => init(document.getElementById("input")!)} />
 
-{#await shikiPromise then highlighter}
-  <div class="px-5 py-32 space-y-3 text-5xl">
-    <div class="">
+{#await shikiPromise}
+  <div class="px-5 py-32 space-y-3 text-3xl md:text-5xl">
+    <div>loading...</div>
+    <div class="text-hint">for some highlightning</div>
+  </div>
+{:then highlighter}
+  <div class="px-5 py-32 space-y-3 text-3xl md:text-5xl">
+    <div>
       {@html highlighter.codeToHtml(text, {
         lang,
         theme,
